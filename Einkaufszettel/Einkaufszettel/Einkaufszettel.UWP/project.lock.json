@@ -23586,10 +23586,10 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\Musab\\Source\\Repos\\myfirstrep\\Einkaufszettel\\Einkaufszettel\\Einkaufszettel.UWP\\Einkaufszettel.UWP.csproj",
+      "projectUniqueName": "C:\\Users\\Musab\\Source\\Repos\\solid-enigma\\Einkaufszettel\\Einkaufszettel\\Einkaufszettel.UWP\\Einkaufszettel.UWP.csproj",
       "projectName": "Einkaufszettel.UWP",
-      "projectPath": "C:\\Users\\Musab\\Source\\Repos\\myfirstrep\\Einkaufszettel\\Einkaufszettel\\Einkaufszettel.UWP\\Einkaufszettel.UWP.csproj",
-      "projectJsonPath": "C:\\Users\\Musab\\Source\\Repos\\myfirstrep\\Einkaufszettel\\Einkaufszettel\\Einkaufszettel.UWP\\project.json",
+      "projectPath": "C:\\Users\\Musab\\Source\\Repos\\solid-enigma\\Einkaufszettel\\Einkaufszettel\\Einkaufszettel.UWP\\Einkaufszettel.UWP.csproj",
+      "projectJsonPath": "C:\\Users\\Musab\\Source\\Repos\\solid-enigma\\Einkaufszettel\\Einkaufszettel\\Einkaufszettel.UWP\\project.json",
       "projectStyle": "ProjectJson"
     },
     "dependencies": {
