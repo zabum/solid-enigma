@@ -17,17 +17,15 @@ namespace NotizMgr
         // Schulrechner unterstützen C# 6.0 nicht:
         // -> keine auto-initialisierer
         // -> keine getter-only props
-        List<Data.Element> m_acElemente { get; set; }
         Data.ProjektMappe m_cCurrentMappe { get; set; }
         Views.MainViewModel m_cMain { get; set; }
-
         BindingSource m_cProj { get; set; }
         BindingSource m_cEle { get; set; }
+        ContextMenu m_cMenu { get; set; }
 
         public MainView()
         {
             InitializeComponent();
-
             m_cMain = new Views.MainViewModel();
             InitBindings();
         }
@@ -37,73 +35,15 @@ namespace NotizMgr
             m_cProj = new BindingSource();
             m_cEle = new BindingSource();
             m_cProj.DataSource = m_cMain.m_acProjekte;
-        }
-        
-        private void neuesProjektToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddProjectToList();
-        }
-
-        private void neueNotizToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddElementToList(eElementType.Notiz);
+            //m_cMenu = new ContextMenu(new MenuItem[]
+            //{
+            //        new MenuItem("Neues Projekt", neuesProjektToolStripMenuItem_Click),
+            //        new MenuItem("Löschen", Löschen_Click)
+            //});
+            //m_cMenu.Popup += OnAufgehen;
+            //lbProjekte.ContextMenu = m_cMenu;
         }
 
-        private void neuerTerminToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddElementToList(eElementType.Termin);
-        }
-
-        private void neueAufgabeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddElementToList(eElementType.Aufgabe);
-        }
-        
-        private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-        
-        private void lbProjekte_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                m_cCurrentMappe = m_cMain.GetSelectedProject(lbProjekte.SelectedIndex);
-                UpdateView();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void projektSpeichernToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                m_cMain.DoSerialize(m_cCurrentMappe);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void projektLadenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var l_cMappe = m_cMain.DoDeserialize();
-                m_cMain.AddProject(l_cMappe);
-                m_cCurrentMappe = l_cMappe;
-                UpdateView();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        
         private void AddElementToList(eElementType l_eType)
         {
             try
@@ -111,8 +51,12 @@ namespace NotizMgr
                 if (m_cCurrentMappe == null)
                     return;
 
-                var element = m_cMain.AddElementDlg(l_eType);
-                m_cCurrentMappe.m_acInhalt.Add(element);
+                var l_cElement = m_cMain.AddElementDlg(l_eType);
+
+                if (l_cElement == null)
+                    return;
+
+                m_cCurrentMappe.m_acInhalt.Add(l_cElement);
 
                 UpdateView();
             }
@@ -134,17 +78,115 @@ namespace NotizMgr
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
         private void UpdateView()
         {
-            if (m_cCurrentMappe != null && m_cCurrentMappe.m_acInhalt != null)
-                m_cEle.DataSource = m_cCurrentMappe.m_acInhalt;
+            if (m_cCurrentMappe != null &&
+                m_cCurrentMappe.m_acInhalt != null)
+            {
+                var notes = m_cCurrentMappe.m_acInhalt.
+                    Where(x => x.GetType() == typeof(Data.Notiz)).ToList();
+                lbNotizen.DataSource = notes;
 
+                var appointments = m_cCurrentMappe.m_acInhalt.
+                    Where(x => x.GetType() == typeof(Data.Termin)).ToList();
+                lbTermine.DataSource = appointments;
+
+                var todos = m_cCurrentMappe.m_acInhalt.
+                    Where(x => x.GetType() == typeof(Data.Aufgabe)).ToList();
+                lbAufgaben.DataSource = todos;
+            }
             lbProjekte.DataSource = m_cProj;
-            lbNotizen.DataSource = m_cEle;
-
             m_cProj.ResetBindings(false);
             m_cEle.ResetBindings(false);
         }
+
+        private void OnAufgehen(object sender, EventArgs e)
+        {
+            if (lbProjekte.SelectedIndex == -1)
+                m_cMenu.MenuItems[1].Enabled = false;
+            else
+                m_cMenu.MenuItems[1].Enabled = true;
+        }
+
+        private void Löschen_Click(object sender, EventArgs e)
+        {
+            m_cProj.RemoveAt(lbProjekte.SelectedIndex);
+            UpdateView();
+        }
+
+        private void neuesProjektToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddProjectToList();
+        }
+
+        private void neueNotizToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddElementToList(eElementType.Notiz);
+            tcElemente.SelectedTab = tpNotiz;
+        }
+
+        private void neuerTerminToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddElementToList(eElementType.Termin);
+            tcElemente.SelectedTab = tpTermin;
+        }
+
+        private void neueAufgabeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddElementToList(eElementType.Aufgabe);
+            tcElemente.SelectedTab = tpAufgabe;
+        }
+
+        private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void lbProjekte_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                m_cCurrentMappe = m_cMain.GetSelectedProject(lbProjekte.SelectedIndex);
+                UpdateView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void projektSpeichernToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                m_cMain.Serialize(m_cCurrentMappe);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void projektLadenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //var l_cMappe = m_cMain.Deserialize();
+                //m_cMain.AddProject(l_cMappe);
+                //m_cCurrentMappe = l_cMappe;
+                var m_cCurrentMappe = m_cMain.Deserialize();
+                if (m_cCurrentMappe == null)
+                    return;
+                m_cMain.AddProject(m_cCurrentMappe);
+                lbProjekte.SelectedItem = m_cCurrentMappe;
+                UpdateView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
     }
 }

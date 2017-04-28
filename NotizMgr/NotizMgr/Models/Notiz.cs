@@ -9,19 +9,15 @@ namespace NotizMgr.Data
 {
     public class Notiz : Element
     {
-        [XmlElement("Inhalt")]
-        public string m_szInhalt { get; set; }
-
         public Notiz() { }  
 
-        public Notiz(eElementType l_eType, string l_szInhalt) : base(l_eType)
+        public Notiz(eElementType l_eType, string l_szInhalt) : base(l_eType, l_szInhalt)
         {
-            m_szInhalt = l_szInhalt;
         }
-        
+
         public override string ToString()
         {
-            return m_szInhalt;
+            return "notiz: " + m_szInhalt;
         }
     }
 }

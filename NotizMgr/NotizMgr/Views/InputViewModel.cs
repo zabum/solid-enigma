@@ -32,16 +32,27 @@ namespace NotizMgr.Views
             }
         }
 
-        internal Element CreateElement(string l_szContent)
+        internal bool CheckForTermin()
+        {
+            switch (m_eType)
+            {
+                case eElementType.Termin:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        internal Element CreateElement(string l_szContent, string l_szDate = "")
         {
             switch (m_eType)
             {
                 case eElementType.Notiz:
-                    return new Data.Notiz(eElementType.Notiz, l_szContent);
+                    return new Notiz(eElementType.Notiz, l_szContent);
                 case eElementType.Termin:
-                    return new Data.Termin(eElementType.Termin, l_szContent);;
+                    return new Termin(eElementType.Termin, l_szContent, l_szDate);
                 case eElementType.Aufgabe:
-                    return new Data.Aufgabe(eElementType.Aufgabe, l_szContent);
+                    return new Aufgabe(eElementType.Aufgabe, l_szContent);
                 default:
                     return null;
             }

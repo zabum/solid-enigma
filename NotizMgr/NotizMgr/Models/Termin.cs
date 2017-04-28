@@ -9,19 +9,19 @@ namespace NotizMgr.Data
 {
     public class Termin : Element
     {
-        [XmlElement("Inhalt")]
-        public string m_szInhalt { get; set; }
+        [XmlElement("Datum")]
+        public string m_szDate { get; set; }
 
         public Termin() { }
 
-        public Termin(eElementType l_eType, string l_szInhalt) : base(l_eType)
+        public Termin(eElementType l_eType, string l_szInhalt, string l_szDate) : base(l_eType, l_szInhalt)
         {
-            m_szInhalt = l_szInhalt;
+            m_szDate = l_szDate;
         }
 
         public override string ToString()
         {
-            return m_szInhalt;
+            return m_szDate + ": " + m_szInhalt;
         }
     }
 }

@@ -187,7 +187,7 @@
             this.tpNotiz.Controls.Add(this.lbNotizen);
             this.tpNotiz.Location = new System.Drawing.Point(4, 22);
             this.tpNotiz.Name = "tpNotiz";
-            this.tpNotiz.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tpNotiz.Padding = new System.Windows.Forms.Padding(3);
             this.tpNotiz.Size = new System.Drawing.Size(503, 264);
             this.tpNotiz.TabIndex = 0;
             this.tpNotiz.Text = "Notizen";
@@ -207,7 +207,7 @@
             this.tpTermin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tpTermin.Location = new System.Drawing.Point(4, 22);
             this.tpTermin.Name = "tpTermin";
-            this.tpTermin.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tpTermin.Padding = new System.Windows.Forms.Padding(3);
             this.tpTermin.Size = new System.Drawing.Size(503, 264);
             this.tpTermin.TabIndex = 1;
             this.tpTermin.Text = "Termine";
@@ -226,7 +226,7 @@
             this.tpAufgabe.Controls.Add(this.lbAufgaben);
             this.tpAufgabe.Location = new System.Drawing.Point(4, 22);
             this.tpAufgabe.Name = "tpAufgabe";
-            this.tpAufgabe.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tpAufgabe.Padding = new System.Windows.Forms.Padding(3);
             this.tpAufgabe.Size = new System.Drawing.Size(503, 264);
             this.tpAufgabe.TabIndex = 2;
             this.tpAufgabe.Text = "Aufgaben";

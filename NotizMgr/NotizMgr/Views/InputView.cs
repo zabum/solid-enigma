@@ -20,6 +20,7 @@ namespace NotizMgr.Views
         {
             InitializeComponent();
             m_cInput = new InputViewModel(l_eType);
+            dateTimeTermin.Visible = m_cInput.CheckForTermin();
             SetCaption();
         }
 
@@ -30,7 +31,7 @@ namespace NotizMgr.Views
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            m_cElement = m_cInput.CreateElement(txtContent.Text);
+            m_cElement = m_cInput.CreateElement(txtContent.Text, dateTimeTermin.Text);
             Close();
         }
 

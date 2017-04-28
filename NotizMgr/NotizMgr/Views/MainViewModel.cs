@@ -13,10 +13,7 @@ namespace NotizMgr.Views
 {
     class MainViewModel
     {
-        public List<ProjektMappe> m_acProjekte { get; set; }
-        public List<Element> m_acElemente { get; set; }
-
-        public ProjektMappe m_cCurrentMappe { get; set; }
+        public List<ProjektMappe> m_acProjekte { get; private set; }
 
         public MainViewModel()
         {
@@ -37,9 +34,8 @@ namespace NotizMgr.Views
             }
             return null;
         }
-
-
-        internal void DoSerialize(ProjektMappe m_cCurrentMappe)
+        
+        public void Serialize(ProjektMappe m_cCurrentMappe)
         {
             SaveFileDialog l_cSave = new SaveFileDialog();
             l_cSave.InitialDirectory = Directory.GetCurrentDirectory();
@@ -52,7 +48,7 @@ namespace NotizMgr.Views
 
         }
 
-        internal ProjektMappe DoDeserialize()
+        public ProjektMappe Deserialize()
         {
             string l_szMappe = "";
             OpenFileDialog l_cOpen = new OpenFileDialog();
@@ -72,7 +68,7 @@ namespace NotizMgr.Views
             return MatchElementTypes(l_cFromXml);
         }
 
-        internal ProjektMappe GetSelectedProject(int l_iSelectedIndex)
+        public ProjektMappe GetSelectedProject(int l_iSelectedIndex)
         {
             foreach (var item in m_acProjekte)
             {
@@ -102,7 +98,7 @@ namespace NotizMgr.Views
             return l_cMappe;
         }
 
-        internal void AddProject(ProjektMappe l_cMappe)
+        public void AddProject(ProjektMappe l_cMappe)
         {
             if (l_cMappe == null)
                 return;
@@ -113,7 +109,7 @@ namespace NotizMgr.Views
             }
         }
 
-        internal void NewProject()
+        public void NewProject()
         {
             AddProjectView l_cAdd = new AddProjectView();
             if (l_cAdd.ShowDialog() == DialogResult.OK)
@@ -121,5 +117,6 @@ namespace NotizMgr.Views
                 AddProject(new ProjektMappe(l_cAdd.m_szProjectName));
             }     
         }
+
     }
 }
