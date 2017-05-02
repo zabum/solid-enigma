@@ -14,9 +14,7 @@ namespace NotizMgr
 {
     public partial class MainView : Form
     {
-        // Schulrechner unterstützen C# 6.0 nicht:
-        // -> keine auto-initialisierer
-        // -> keine getter-only props
+        // Anpassungen für C# 6.0 
         Data.ProjektMappe m_cCurrentMappe { get; set; }
         Views.MainViewModel m_cMain { get; set; }
         BindingSource m_cProj { get; set; }

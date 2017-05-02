@@ -162,6 +162,8 @@
             // 
             // lbProjekte
             // 
+            this.lbProjekte.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lbProjekte.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbProjekte.FormattingEnabled = true;
             this.lbProjekte.Location = new System.Drawing.Point(12, 53);
@@ -172,6 +174,9 @@
             // 
             // tcElemente
             // 
+            this.tcElemente.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tcElemente.Controls.Add(this.tpNotiz);
             this.tcElemente.Controls.Add(this.tpTermin);
             this.tcElemente.Controls.Add(this.tpAufgabe);
@@ -195,6 +200,9 @@
             // 
             // lbNotizen
             // 
+            this.lbNotizen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbNotizen.FormattingEnabled = true;
             this.lbNotizen.Location = new System.Drawing.Point(0, 0);
             this.lbNotizen.Name = "lbNotizen";
@@ -215,6 +223,9 @@
             // 
             // lbTermine
             // 
+            this.lbTermine.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbTermine.FormattingEnabled = true;
             this.lbTermine.Location = new System.Drawing.Point(0, 0);
             this.lbTermine.Name = "lbTermine";
@@ -234,6 +245,9 @@
             // 
             // lbAufgaben
             // 
+            this.lbAufgaben.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbAufgaben.FormattingEnabled = true;
             this.lbAufgaben.Location = new System.Drawing.Point(0, 0);
             this.lbAufgaben.Name = "lbAufgaben";
